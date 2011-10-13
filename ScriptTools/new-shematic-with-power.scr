@@ -1,0 +1,37 @@
+# Generates an A4 schematic drawing with power supply and
+# a DC/DC converter
+add a4l-loc (0.0 0.0);
+grid on;
+
+# Place DC plug
+add DCJ0303 'DC_IN' R270 (0.5 0.8); mirror 'DC_IN'; rotate 'DC_IN' R90;
+value DC_IN MJ-15;
+
+# Place voltage regulator with its capacitors
+add C-EU025-040X050@resistor.lbr 'C1' (1.1 0.8);
+value 'C1' '330nF';
+add 78XXL '7805' (1.7 0.9);value 7805 7805;
+add C-EU025-040X050@resistor.lbr 'C2' (2.3 0.8);
+value 'C2' '100nF';
+
+# Place DC/DC converter
+add NMA 'dcdc' (3.1 0.8); value dcdc RP-0505D;
+
+# Draw wires
+wire (0.8 0.9)(1.1 0.9)(1.4 0.9);wire (2.0 0.9)(2.3 0.9)(2.6 0.9);
+wire (0.8 0.7)(0.8 0.6)(1.1 0.6)(1.7 0.6)(2.3 0.6)(2.6 0.6)(2.6 0.7);
+net 'V+' (3.6 0.9)(4.0 0.9);
+net 'GND' (3.6 0.8)(4.2 0.8);
+add GND@supply1.lbr (4.2 0.7);
+net 'V-' (3.6 0.7)(4.0 0.7);
+junction (1.1 0.9)(1.1 0.6);
+junction (1.7 0.6)
+junction (2.3 0.9)(2.3 0.6);
+
+# Place a to be copied
+add MPT2@con-phoenix-254 'OUT-1' R180 (5.5 0.7);
+
+
+
+
+
